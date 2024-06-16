@@ -57,13 +57,12 @@ class ProductController extends Controller
 
         $dataProductVariantsTmp = $request->product_variants;
         $dataProductVariants = [];
-
         foreach ($dataProductVariantsTmp as $key => $item) {
             $tmp = explode('-', $key);
             $dataProductVariants[] = [
                 'product_size_id' => $tmp[0],
                 'product_color_id' => $tmp[1],
-                'quatity' => $item['quatity'],
+                'quantity' => $item['quantity'] ?? 0,
                 'image' => $item['image'] ?? null,
             ];
         }
@@ -149,7 +148,7 @@ class ProductController extends Controller
                 $product->variants()->delete();
                 $product->delete();
             }, 3);
-            return back();
+            return redirect()->route('admin.products.index');
         } catch (\Exception $exception) {
             return back();
         }

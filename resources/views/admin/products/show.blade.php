@@ -58,11 +58,10 @@
 
                                 <div class="mt-3">
                                     <label for="catalogue_id" class="form-label">Catalogues</label>
-                                    <select id="" class="form-select" name="catalogue_id" id="catalogue_id"
-                                        disabled>
+                                    <select id="" class="form-select" name="catalogue_id" id="catalogue_id" disabled >
                                         @foreach ($catalogues as $id => $name)
                                             <option value="{{ $id }}"
-                                                @if ($product->catalogue_id == $id) checked @endif>
+                                                @if ($product->catalogue_id == $id) selected @endif>
                                                 {{ $name }}
                                             </option>
                                         @endforeach
@@ -87,7 +86,7 @@
                                     <div class="col-md-2">
                                         <div class="form-check form-switch form-switch-primary">
                                             <input class="form-check-input" type="checkbox" role="switch" name="is_active"
-                                                id="is_active" @if ($product->is_active) checked @endif>
+                                                id="is_active" @if ($product->is_active == 1) checked @endif disabled>
                                             <label class="form-check-label" for="is_active">Is Active</label>
                                         </div>
                                     </div>
@@ -95,7 +94,7 @@
                                         <div class="form-check form-switch form-switch-warning">
                                             <input class="form-check-input" type="checkbox" role="switch"
                                                 name="is_hot_deal" id="is_hot_deal"
-                                                @if ($product->is_active) checked @endif>
+                                                @if ($product->is_hot_deal == 1) checked @endif disabled>
                                             <label class="form-check-label" for="is_hot_deal">Is Hot Deal</label>
                                         </div>
                                     </div>
@@ -103,14 +102,14 @@
                                         <div class="form-check form-switch form-switch-success">
                                             <input class="form-check-input" type="checkbox" role="switch"
                                                 name="is_good_deal" id="is_good_deal"
-                                                @if ($product->is_active) checked @endif>
+                                                @if ($product->is_good_deal == 1) checked @endif disabled>
                                             <label class="form-check-label" for="is_good_deal">Is Good Deal</label>
                                         </div>
                                     </div>
                                     <div class="col-md-2">
                                         <div class="form-check form-switch form-switch-danger">
                                             <input class="form-check-input" type="checkbox" role="switch" name="is_new"
-                                                id="is_new" @if ($product->is_active) checked @endif>
+                                                id="is_new" @if ($product->is_new == 1) checked @endif disabled>
                                             <label class="form-check-label" for="is_new">Is New</label>
                                         </div>
                                     </div>
@@ -118,7 +117,7 @@
                                         <div class="form-check form-switch form-switch-info">
                                             <input class="form-check-input" type="checkbox" role="switch"
                                                 name="is_show_home" id="is_show_home"
-                                                @if ($product->is_active) checked @endif>
+                                                @if ($product->is_show_home == 1) checked @endif disabled>
                                             <label class="form-check-label" for="is_show_home">Is Show Home</label>
                                         </div>
                                     </div>
@@ -127,19 +126,19 @@
                                 <div class="row">
                                     <div class="mt-3">
                                         <label for="description" class="form-label">Description</label>
-                                        <textarea class="form-control" name="description" id="description" rows="2">{{ $product->description }}</textarea>
+                                        <textarea class="form-control" name="description" id="description" rows="2" disabled>{{ $product->description }}</textarea>
                                     </div>
                                     <div class="mt-3">
                                         <label for="material" class="form-label">Material</label>
-                                        <textarea class="form-control" name="material" id="material" rows="2">{{ $product->material }}</textarea>
+                                        <textarea class="form-control" name="material" id="material" rows="2" disabled>{{ $product->material }}</textarea>
                                     </div>
                                     <div class="mt-3">
                                         <label for="user_manual" class="form-label">User Manual</label>
-                                        <textarea class="form-control" name="user_manual" id="user_manual" rows="2">{{ $product->user_manual }}</textarea>
+                                        <textarea class="form-control" name="user_manual" id="user_manual" rows="2" disabled>{{ $product->user_manual }}</textarea>
                                     </div>
                                     <div class="mt-3">
                                         <label for="content" class="form-label">Content</label>
-                                        <textarea class="form-control" name="content" id="content">{{ $product->content }}</textarea>
+                                        <textarea class="form-control" name="content" id="content" disabled>{{ $product->content }}</textarea>
                                     </div>
                                 </div>
                             </div>
@@ -189,8 +188,8 @@
                                                 @if ($variant['product_size_id'] == $sizeID && $variant['product_color_id'] == $colorID)
                                                     <td>
                                                         <input type="number" class="form-control"
-                                                            name="product_variants[{{ $sizeID . '-' . $colorID }}][quatity]"
-                                                            value="{{ $variant['quantity'] }}">
+                                                            name="product_variants[{{ $sizeID . '-' . $colorID }}][quantity]"
+                                                            value="{{ $variant['quantity'] }}" disabled>
                                                     </td>
                                                 @endif
                                                 @if ($variant['product_size_id'] == $sizeID && $variant['product_color_id'] == $colorID)
@@ -269,13 +268,17 @@
                         <div class="row gy-4">
                             <div class="col-md-12">
                                 <div>
-                                    @dd($productTags->toArray())
                                     <label for="tags" class="form-label">Tag</label>
-                                    <select name="tags[]" id="tags" class="form-select" multiple>
+                                    <select name="tags[]" id="tags" class="form-select" multiple disabled>
                                         @foreach ($tags as $id => $name)
                                             <option value="{{ $id }}"
-                                                @foreach ($productTags as $productTagId => $item)
-                                                    @if ($item->tag_id == $id) checked @endif @endforeach>
+                                            @for ($i = 0; $i < count($productTags); $i++)
+                                                @if ($productTags[$i]->id == $id)
+                                                    checked 
+                                                    style=" background-color: light-dark(rgb(206, 206, 206), rgb(84, 84, 84));
+                                                            color: light-dark(rgb(16, 16, 16), rgb(255, 255, 255));"
+                                                @endif
+                                            @endfor>
                                                 {{ $name }}
                                             </option>
                                         @endforeach
@@ -295,8 +298,19 @@
     <div class="row">
         <div class="col-lg-12">
             <div class="card">
-                <div class="card-header align-items-center d-flex">
-                    <button type="submit" class="btn btn-primary">Save</button>
+                <div class="card-header align-items-center d-flex justify-content-center">
+                    <div>
+                        <a href="{{ route('admin.products.edit', $product->sku) }}"
+                            class="btn btn-warning ms-3 me-3">Sửa</a>
+                    </div>
+                    <div class="">
+                        <form action="{{ route('admin.products.destroy', $product) }}" method="post">
+                            @csrf
+                            @method('DELETE')
+                            <button onclick="return confirm('Chắc chắn không?')" type="submit"
+                                class="btn btn-danger">Xóa</button>
+                        </form>
+                    </div>
                 </div>
             </div>
         </div>

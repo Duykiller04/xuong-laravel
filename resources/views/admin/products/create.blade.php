@@ -176,7 +176,7 @@
                                                 </td>
                                                 <td>
                                                     <input type="number" class="form-control"
-                                                        name="product_variants[{{ $sizeID . '-' . $colorID }}][quatity]">
+                                                        name="product_variants[{{ $sizeID . '-' . $colorID }}][quantity]">
                                                 </td>
                                                 <td>
                                                     <input type="file" class="form-control"
