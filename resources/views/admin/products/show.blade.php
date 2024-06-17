@@ -76,7 +76,7 @@
                                             $url = Storage::url($url);
                                         }
                                     @endphp
-                                    <img src="{{ $url }}" alt="" width="100px">
+                                    <img src="{{ $url }}" alt="" width="420px">
                                 </div>
 
                             </div>
@@ -239,7 +239,7 @@
                                                 $url = Storage::url($url);
                                             }
                                         @endphp
-                                        <img src="{{ $url }}" alt="" width="100px">
+                                        <img src="{{ $url }}" alt="" width="150px">
                                     </div>
                                 </div>
                             @endforeach
@@ -274,9 +274,7 @@
                                             <option value="{{ $id }}"
                                             @for ($i = 0; $i < count($productTags); $i++)
                                                 @if ($productTags[$i]->id == $id)
-                                                    checked 
-                                                    style=" background-color: light-dark(rgb(206, 206, 206), rgb(84, 84, 84));
-                                                            color: light-dark(rgb(16, 16, 16), rgb(255, 255, 255));"
+                                                    selected
                                                 @endif
                                             @endfor>
                                                 {{ $name }}
