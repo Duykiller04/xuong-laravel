@@ -38,6 +38,25 @@
                     </a>
                 </li> <!-- end Dashboard Menu -->
 
+                {{-- <li class="nav-item">
+                    <a class="nav-link menu-link" href="#sidebarLayoutsUsers" data-bs-toggle="collapse"
+                        role="button" aria-expanded="false" aria-controls="sidebarLayoutsUsers">
+                        <i class="ri-layout-3-line"></i> <span data-key="t-layouts">Người dùng</span>
+                    </a>
+                    <div class="collapse menu-dropdown" id="sidebarLayoutsUsers">
+                        <ul class="nav nav-sm flex-column">
+                            <li class="nav-item">
+                                <a href="{{ route('admin.users.index') }}" class="nav-link"
+                                    data-key="t-horizontal">Danh sách</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="{{ route('admin.users.create') }}" class="nav-link"
+                                    data-key="t-horizontal">Thêm mới</a>
+                            </li>
+                        </ul>
+                    </div>
+                </li> --}}
+
                 <li class="nav-item">
                     <a class="nav-link menu-link" href="#sidebarLayouts" data-bs-toggle="collapse"
                         role="button" aria-expanded="false" aria-controls="sidebarLayouts">
@@ -71,6 +90,47 @@
                             <li class="nav-item">
                                 <a href="{{ route('admin.products.create') }}" class="nav-link"
                                     data-key="t-horizontal">Thêm mới</a>
+                            </li>
+                        </ul>
+                    </div>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link menu-link collapsed" href="#variant" data-bs-toggle="collapse" role="button" aria-expanded="false" aria-controls="variant">
+                        <i class="ri-apps-2-line"></i> <span data-key="t-apps">Biến thể</span>
+                    </a>
+                    <div class="collapse menu-dropdown" id="variant">
+                        <ul class="nav nav-sm flex-column">
+                            <li class="nav-item">
+                                <a href="#size" class="nav-link collapsed" data-bs-toggle="collapse" role="button" aria-expanded="false" aria-controls="size" data-key="t-calender">
+                                    Size
+                                </a>
+                                <div class="collapse menu-dropdown" id="size">
+                                    <ul class="nav nav-sm flex-column">
+                                        <li class="nav-item">
+                                            <a href="{{ route('admin.productSizes.index') }}" class="nav-link" data-key="t-main-calender">Danh sách</a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a href="{{ route('admin.productSizes.create') }}" class="nav-link" data-key="t-month-grid">Thêm mới</a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </li>
+
+                            <li class="nav-item">
+                                <a href="#color" class="nav-link collapsed" data-bs-toggle="collapse" role="button" aria-expanded="false" aria-controls="color" data-key="t-calender">
+                                    Color
+                                </a>
+                                <div class="collapse menu-dropdown" id="color">
+                                    <ul class="nav nav-sm flex-column">
+                                        <li class="nav-item">
+                                            <a href="{{ route('admin.productColors.index') }}" class="nav-link" data-key="t-main-calender">Danh sách</a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a href="{{ route('admin.productColors.create') }}" class="nav-link" data-key="t-month-grid">Thêm mới</a>
+                                        </li>
+                                    </ul>
+                                </div>
                             </li>
                         </ul>
                     </div>

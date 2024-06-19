@@ -51,7 +51,7 @@ class ProductController extends Controller
         $dataProduct['is_new'] = isset($dataProduct['is_new']) ? 1 : 0;
         $dataProduct['is_show_home'] = isset($dataProduct['is_show_home']) ? 1 : 0;
         $dataProduct['slug'] = Str::slug($dataProduct['name']) . '-' . $dataProduct['sku'];
-        if ($dataProduct['img_thumbnail']) {
+        if (isset($dataProduct['img_thumbnail']) && $dataProduct['img_thumbnail'] != null) {
             $dataProduct['img_thumbnail'] = Storage::put('products', $dataProduct['img_thumbnail']);
         }
 
@@ -163,7 +163,7 @@ class ProductController extends Controller
         try {
             DB::beginTransaction();
             /** @var Product $product */
-            if ($dataProduct['img_thumbnail']) {
+            if (isset($dataProduct['img_thumbnail']) && $dataProduct['img_thumbnail'] != null) {
                 $dataProduct['img_thumbnail'] = Storage::put('products', $dataProduct['img_thumbnail']);
             }
             $product->update($dataProduct);
