@@ -151,8 +151,8 @@ class ProductController extends Controller
         $dataProduct['slug'] = Str::slug($dataProduct['name']) . '-' . $dataProduct['sku'];
         $galleries = Product::with('galleries')->find($product->id)->galleries->toArray();
 
-        if ($request->has('product_galleries')) {
-            foreach ($request->product_galleries as $key => $image) {
+        if ($request->has('product_gallery')) {
+            foreach ($request->product_gallery as $key => $image) {          
                 if ($image != null) {
                     $imgPath = Storage::put('products', $image);
                     if($galleries != []){
