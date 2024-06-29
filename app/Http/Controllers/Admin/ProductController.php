@@ -150,12 +150,24 @@ class ProductController extends Controller
         $dataProduct['is_show_home'] = isset($dataProduct['is_show_home']) ? 1 : 0;
         $dataProduct['slug'] = Str::slug($dataProduct['name']) . '-' . $dataProduct['sku'];
         $galleries = Product::with('galleries')->find($product->id)->galleries->toArray();
-        
-        if ($request->has('product_gallery')) {
-            foreach ($request->product_gallery as $key => $img) {
-                if ($img != null) {
-                    $imgPath = Storage::put('products', $img);
-                    ProductGallery::updateOrCreate(['id' => $galleries[$key]['id']], ['image' => $imgPath]);
+
+        if ($request->has('product_galleries')) {
+            foreach ($request->product_galleries as $key => $image) {
+                if ($image != null) {
+                    $imgPath = Storage::put('products', $image);
+                    if($galleries != []){
+                        ProductGallery::updateOrCreate(
+                            ['id' => $galleries[$key]['id']],
+                            ['image' => $imgPath],
+                        );
+                    }else{
+                        $imgPath = Storage::put('products', $image);
+                        ProductGallery::query()->create([
+                            'product_id' => $product->id,
+                            'image' => $imgPath,
+                        ]);
+                    }
+                    
                 }
             }
         }

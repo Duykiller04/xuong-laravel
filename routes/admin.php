@@ -8,6 +8,7 @@ use App\Http\Controllers\Admin\CatalogueController;
 
 Route::prefix('admin')
     ->as('admin.')
+    ->middleware(['auth', 'is_admin'])
     ->group(function () {
 
         Route::get('/', function(){
