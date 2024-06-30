@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\StoreProductSizeRequest;
+use App\Http\Requests\UpdateProductSizeRequest;
 use App\Models\ProductSize;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -31,7 +33,7 @@ class ProductSizeController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(StoreProductSizeRequest $request)
     {
         try {
             DB::beginTransaction();
@@ -63,7 +65,7 @@ class ProductSizeController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, ProductSize $productSize)
+    public function update(UpdateProductSizeRequest $request, ProductSize $productSize)
     {
         try {
             DB::beginTransaction();

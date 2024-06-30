@@ -39,6 +39,15 @@
                         Thêm mới thuộc tính color
                     </h5>
                 </div>
+                @if ($errors->any())
+                    <div class="alert alert-danger">
+                        <ul>
+                            @foreach ($errors->all() as $error)
+                                <li>{{ $error }}</li>
+                            @endforeach
+                        </ul>
+                    </div>
+                @endif
                 <div class="card-body">
                     <form action="{{ route('admin.productColors.store') }}" method="POST">
                         @csrf

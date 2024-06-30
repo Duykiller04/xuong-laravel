@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\StoreProductRequest;
+use App\Http\Requests\UpdateProductRequest;
 use App\Models\Catalogue;
 use App\Models\Product;
 use App\Models\ProductColor;
@@ -42,7 +44,7 @@ class ProductController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(StoreProductRequest $request)
     {
         $dataProduct = $request->except(['product_variants', 'tags', 'product_gallery']);
         $dataProduct['is_active'] = isset($dataProduct['is_active']) ? 1: 0;
@@ -140,7 +142,7 @@ class ProductController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Product $product)
+    public function update(UpdateProductRequest $request, Product $product)
     {
         $dataProduct = $request->except(['product_variants', 'tags', 'product_gallery']);
         $dataProduct['is_active'] = isset($dataProduct['is_active']) ? 1: 0;

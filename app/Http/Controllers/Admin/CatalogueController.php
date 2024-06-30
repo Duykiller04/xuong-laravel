@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\StoreCatalogueRequest;
+use App\Http\Requests\UpdateCatalogueRequest;
 use App\Models\Catalogue;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
@@ -31,7 +33,7 @@ class CatalogueController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(StoreCatalogueRequest $request)
     {
         $data = $request->except('cover');
         $data['is_active'] ??= 0;
@@ -67,7 +69,7 @@ class CatalogueController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(UpdateCatalogueRequest $request, string $id)
     {
         $model = Catalogue::query()->findOrFail($id);
         $data = $request->except('cover');
