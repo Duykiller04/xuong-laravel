@@ -37,10 +37,10 @@ class ProductColorController extends Controller
             DB::beginTransaction();
             ProductColor::create($request->all());
             DB::commit();
-            return redirect()->route('admin.productColors.index');
+            return redirect()->route('admin.productColors.index')->with('success','Thêm thành công biến thể color');
         } catch (\Exception $e) {
             DB::rollBack();
-            return back();
+            return back()->with('error','Lỗi thêm biến thể color');
         }
     }
 
@@ -69,10 +69,10 @@ class ProductColorController extends Controller
             DB::beginTransaction();
             $productColor->update($request->all());
             DB::commit();
-            return back();
+            return back()->with('success','Cập nhật thành công biến thể color');
         } catch (\Exception $e) {
             DB::rollBack();
-            return back();
+            return back()->with('error','Lỗi cập nhật biến thể color');
         }
     }
 
@@ -85,10 +85,10 @@ class ProductColorController extends Controller
             DB::beginTransaction();
             $productColor->delete();
             DB::commit();
-            return redirect()->route('admin.productColors.index');
+            return redirect()->route('admin.productColors.index')->with('success','Xóa thành công biến thể color');
         } catch (\Exception $e) {
             DB::rollBack();
-            return back();
+            return back()->with('error','Lỗi xóa biến thể color');
         }
     }
 }

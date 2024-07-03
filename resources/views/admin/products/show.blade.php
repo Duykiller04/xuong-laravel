@@ -76,7 +76,7 @@
                                             $url = Storage::url($url);
                                         }
                                     @endphp
-                                    <img src="{{ $url }}" alt="" width="420px">
+                                    <img src="{{ $url }}" alt="" width="320px">
                                 </div>
 
                             </div>

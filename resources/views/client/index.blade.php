@@ -10,9 +10,29 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous">
     </script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </head>
 
 <body>
+    @if (session()->has('success'))
+        <script>
+            Swal.fire({
+                icon: "success",
+                title: "Thành công",
+                text: " {{ session('success') }} ",
+                timer: 2500
+            });
+        </script>
+    @endif
+    @if (session()->has('error'))
+        <script>
+            Swal.fire({
+            icon: "error",
+            title: "Lỗi",
+            text: " {{ session('success') }} ",
+            });
+        </script>
+    @endif
     <div class="row p-sm-5 ">
         @foreach ($products as $item)
             <div class="col-6 col-sm-6 col-lg-3 mb-5">

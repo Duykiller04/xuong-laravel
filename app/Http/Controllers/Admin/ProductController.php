@@ -97,10 +97,10 @@ class ProductController extends Controller
 
             DB::commit();
 
-            return redirect()->route('admin.products.index');
+            return redirect()->route('admin.products.index')->with('success','Thêm thành công sản phẩm');
         } catch (\Exception $exception) {
             DB::rollBack();
-            return back();
+            return back()->with('error','Lỗi thêm sản phẩm');
         }
 
     }
@@ -210,10 +210,10 @@ class ProductController extends Controller
 
             DB::commit();
 
-            return back();
+            return back()->with('success','Cập nhật thành công sản phẩm');
         } catch (\Exception $exception) {
             DB::rollBack();
-            return back();
+            return back()->with('error','Lỗi cập nhật sản phẩm');
         }
     }
 
@@ -229,9 +229,9 @@ class ProductController extends Controller
                 $product->variants()->delete();
                 $product->delete();
             }, 3);
-            return redirect()->route('admin.products.index');
+            return redirect()->route('admin.products.index')->with('success','Xóa thành công sản phẩm');
         } catch (\Exception $exception) {
-            return back();
+            return back()->with('error','Lỗi xóa sản phẩm');
         }
     }
 }

@@ -7,6 +7,7 @@ use App\Http\Requests\StoreCatalogueRequest;
 use App\Http\Requests\UpdateCatalogueRequest;
 use App\Models\Catalogue;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 
 class CatalogueController extends Controller
@@ -41,9 +42,16 @@ class CatalogueController extends Controller
             $data['cover'] = Storage::put(self::PATH_UPLOAD, $request->file('cover'));
         }
 
-        Catalogue::query()->create($data);
-
-        return redirect()->route('admin.catalogues.index');
+        try {
+            DB::beginTransaction();
+            Catalogue::query()->create($data);
+            DB::commit();
+            return redirect()->route('admin.catalogues.index')->with('success','Thêm thành công danh mục sản phẩm');
+        } catch (\Exception $e) {
+            DB::rollBack();
+            return back()->with('error','Lỗi thêm danh mục sản phẩm');
+        }
+        
     }
 
     /**
@@ -80,12 +88,19 @@ class CatalogueController extends Controller
         }
         $currentCover = $model->cover;
         
-        $model->update($data);
+        try {
+            DB::beginTransaction();
+            $model->update($data);
 
-        if($request->hasFile('cover') && $currentCover && Storage::exists($currentCover)){
-            Storage::delete($currentCover);
+            if($request->hasFile('cover') && $currentCover && Storage::exists($currentCover)){
+                Storage::delete($currentCover);
+            }
+            DB::commit();
+            return back()->with('success','Cập nhật thành công danh mục sản phẩm');
+        } catch (\Exception $e) {
+            DB::rollBack();
+            return back()->with('error','Lỗi cập nhật danh mục sản phẩm');
         }
-        return back();
     }
 
     /**
@@ -94,10 +109,19 @@ class CatalogueController extends Controller
     public function destroy(string $id)
     {
         $model = Catalogue::query()->findOrFail($id);
-        $model->delete();
-        if($model->cover && Storage::exists($model->cover)){
-            Storage::delete($model->cover);
+
+        try {
+            DB::beginTransaction();
+            $model->delete();
+            if($model->cover && Storage::exists($model->cover)){
+                Storage::delete($model->cover);
+            }
+            DB::commit();
+            return redirect()->route('admin.catalogues.index')->with('success','Xóa thành công danh mục sản phẩm');
+            } catch (\Exception $e) {
+            DB::rollBack();
+            return back()->with('error','Lỗi xóa danh mục sản phẩm');
         }
-        return redirect()->route('admin.catalogues.index');
+    
     }
 }

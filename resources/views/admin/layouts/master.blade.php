@@ -7,14 +7,15 @@
     <meta charset="utf-8" />
     <title>@yield('title')</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <base href="{{ 'http://xuong-thuc-hanh.test/' }}">
     <!-- App favicon -->
     <link rel="shortcut icon" href="{{ asset('theme/assets/images/favicon.ico') }}">
 
-   
-    @yield('style-libs')
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
+    @yield('style-libs')
     <!-- Layout config Js -->
-    <script src="{{ asset('assets/js/layout.js') }}"></script>
+    <script src="{{ asset('theme/assets/js/layout.js') }}"></script>
     <!-- Bootstrap Css -->
     <link href="{{ asset('theme/assets/css/bootstrap.min.css') }}" rel="stylesheet" type="text/css" />
     <!-- Icons Css -->
@@ -23,12 +24,31 @@
     <link href="{{ asset('theme/assets/css/app.min.css') }}" rel="stylesheet" type="text/css" />
     <!-- custom Css-->
     <link href="{{ asset('theme/assets/css/custom.min.css') }}" rel="stylesheet" type="text/css" />
-    
+
     @yield('styles')
 </head>
 
 <body>
 
+    @if (session()->has('success'))
+        <script>
+            Swal.fire({
+                icon: "success",
+                title: "Thành công",
+                text: " {{ session('success') }} ",
+                timer: 2500
+            });
+        </script>
+    @endif
+    @if (session()->has('error'))
+        <script>
+            Swal.fire({
+            icon: "error",
+            title: "Lỗi",
+            text: " {{ session('success') }} ",
+            });
+        </script>
+    @endif
     <!-- Begin page -->
     <div id="layout-wrapper">
 
@@ -37,7 +57,7 @@
 
         <!-- ========== App Menu ========== -->
         @include('admin.layouts.sidebar');
-        
+
         <!-- Left Sidebar End -->
         <!-- Vertical Overlay-->
         <div class="vertical-overlay"></div>
@@ -57,7 +77,7 @@
             </div>
             <!-- End Page-content -->
             @include('admin.layouts.footer');
-            
+
         </div>
         <!-- end main content-->
 
@@ -96,6 +116,11 @@
     <script src="{{ asset('theme/assets/libs/feather-icons/feather.min.js') }}"></script>
     <script src="{{ asset('theme/assets/js/pages/plugins/lord-icon-2.1.0.js') }}"></script>
     <script src="{{ asset('theme/assets/js/plugins.js') }}"></script>
+
+    {{-- plugins --}}
+    <script type='text/javascript' src='https://cdn.jsdelivr.net/npm/toastify-js'></script>
+    <script type='text/javascript' src='theme/assets/libs/choices.js/public/assets/scripts/choices.min.js'></script>
+    <script type='text/javascript' src='theme/assets/libs/flatpickr/flatpickr.min.js'></script>
 
     @yield('script-libs')
 
