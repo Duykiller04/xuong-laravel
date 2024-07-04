@@ -36,7 +36,9 @@
                     <a class="nav-link menu-link" href="{{ route('admin.dashboard') }}">
                         <i class="ri-dashboard-2-line"></i> <span data-key="t-dashboards">Dashboards</span>
                     </a>
-                </li> <!-- end Dashboard Menu -->
+                </li> 
+                
+                <!-- end Dashboard Menu -->
 
                 {{-- <li class="nav-item">
                     <a class="nav-link menu-link" href="#sidebarLayoutsUsers" data-bs-toggle="collapse"
@@ -135,6 +137,12 @@
                         </ul>
                     </div>
                 </li>
+                
+                <li class="nav-item">
+                    <a class="nav-link menu-link" href="{{ route('admin.order.index') }}">
+                        <i class="ri-dashboard-2-line"></i> <span data-key="t-dashboards">Đơn hàng</span>
+                    </a>
+                </li> 
 
             </ul>
         </div>

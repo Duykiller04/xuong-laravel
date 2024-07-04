@@ -13,8 +13,10 @@ class CartController extends Controller
     public function list(){
         $cart = session('cart');
         $totalAmount = 0;
-        foreach ($cart as $item) {
-            $totalAmount += $item['quantity_buy'] * ($item['price_sale'] ?: $item['price_regular']);
+        if($cart != null){
+            foreach ($cart as $item) {
+                $totalAmount += $item['quantity_buy'] * ($item['price_sale'] ?: $item['price_regular']);
+            }
         }
         return view('client.cart-list', compact('totalAmount'));
     }

@@ -1,10 +1,10 @@
 <?php
-use App\Http\Controllers\Admin\ProductColor;
 use App\Http\Controllers\Admin\ProductColorController;
 use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\Admin\ProductSizeController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\CatalogueController;
+use App\Http\Controllers\Admin\OrderController;
 
 Route::prefix('admin')
     ->as('admin.')
@@ -31,4 +31,5 @@ Route::prefix('admin')
         Route::resource('products', ProductController::class);
         Route::resource('productSizes', ProductSizeController::class);
         Route::resource('productColors', ProductColorController::class);
+        Route::resource('order', OrderController::class);
 });
