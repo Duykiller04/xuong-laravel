@@ -244,3 +244,25 @@
     </div>
     <!--end row-->
 @endsection
+
+@section('scripts')
+    @if (session()->has('success'))
+    <script>
+        Swal.fire({
+            icon: "success",
+            title: "Thành công",
+            text: " {{ session('success') }} ",
+            timer: 2500
+        });
+    </script>
+    @endif
+    @if (session()->has('error'))
+    <script>
+        Swal.fire({
+        icon: "error",
+        title: "Lỗi",
+        text: " {{ session('success') }} ",
+        });
+    </script>
+    @endif
+@endsection
