@@ -40,7 +40,7 @@
                 
                 <!-- end Dashboard Menu -->
 
-                {{-- <li class="nav-item">
+                <li class="nav-item">
                     <a class="nav-link menu-link" href="#sidebarLayoutsUsers" data-bs-toggle="collapse"
                         role="button" aria-expanded="false" aria-controls="sidebarLayoutsUsers">
                         <i class="ri-layout-3-line"></i> <span data-key="t-layouts">Người dùng</span>
@@ -57,7 +57,7 @@
                             </li>
                         </ul>
                     </div>
-                </li> --}}
+                </li>
 
                 <li class="nav-item">
                     <a class="nav-link menu-link" href="#sidebarLayouts" data-bs-toggle="collapse"

@@ -43,12 +43,9 @@ class CatalogueController extends Controller
         }
 
         try {
-            DB::beginTransaction();
             Catalogue::query()->create($data);
-            DB::commit();
             return redirect()->route('admin.catalogues.index')->with('success','Thêm thành công danh mục sản phẩm');
         } catch (\Exception $e) {
-            DB::rollBack();
             return back()->with('error','Lỗi thêm danh mục sản phẩm');
         }
         
@@ -89,16 +86,12 @@ class CatalogueController extends Controller
         $currentCover = $model->cover;
         
         try {
-            DB::beginTransaction();
             $model->update($data);
-
             if($request->hasFile('cover') && $currentCover && Storage::exists($currentCover)){
                 Storage::delete($currentCover);
             }
-            DB::commit();
             return back()->with('success','Cập nhật thành công danh mục sản phẩm');
         } catch (\Exception $e) {
-            DB::rollBack();
             return back()->with('error','Lỗi cập nhật danh mục sản phẩm');
         }
     }
@@ -111,15 +104,12 @@ class CatalogueController extends Controller
         $model = Catalogue::query()->findOrFail($id);
 
         try {
-            DB::beginTransaction();
             $model->delete();
             if($model->cover && Storage::exists($model->cover)){
                 Storage::delete($model->cover);
             }
-            DB::commit();
             return redirect()->route('admin.catalogues.index')->with('success','Xóa thành công danh mục sản phẩm');
             } catch (\Exception $e) {
-            DB::rollBack();
             return back()->with('error','Lỗi xóa danh mục sản phẩm');
         }
     

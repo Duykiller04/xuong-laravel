@@ -1,17 +1,19 @@
 <?php
+
 use App\Http\Controllers\Admin\ProductColorController;
 use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\Admin\ProductSizeController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\CatalogueController;
 use App\Http\Controllers\Admin\OrderController;
+use App\Http\Controllers\Admin\UserController;
 
 Route::prefix('admin')
     ->as('admin.')
     ->middleware(['auth', 'is_admin'])
     ->group(function () {
 
-        Route::get('/', function(){
+        Route::get('/', function () {
             return view('admin.dashboard');
         })->name('dashboard');
 
@@ -25,11 +27,11 @@ Route::prefix('admin')
                 Route::get('{id}/edit',         [CatalogueController::class, 'edit'])->name('edit');
                 Route::put('{id}/update',       [CatalogueController::class, 'update'])->name('update');
                 Route::get('{id}/destroy',   [CatalogueController::class, 'destroy'])->name('destroy');
-
             });
 
         Route::resource('products', ProductController::class);
         Route::resource('productSizes', ProductSizeController::class);
         Route::resource('productColors', ProductColorController::class);
         Route::resource('order', OrderController::class);
-});
+        Route::resource('users',UserController::class);
+    });

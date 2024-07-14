@@ -62,12 +62,9 @@ class OrderController extends Controller
     public function update(Request $request, Order $order)
     {
         try {
-            DB::beginTransaction();
             $order->update($request->all());
-            DB::commit();
             return back()->with('success','Cập nhật thành công đơn hàng');
         } catch (\Exception $e) {
-            DB::rollBack();
             return back()->with('error','Lỗi cập nhật đơn hàng');
         }
     }

@@ -70,7 +70,8 @@
 
                                     <div class="mt-3">
                                         <label for="catalogue_id" class="form-label">Catalogues</label>
-                                        <select id="" class="form-select" name="catalogue_id" id="catalogue_id">
+                                        <select id="" class="js-example-basic-single" name="catalogue_id"
+                                            id="catalogue_id">
                                             @foreach ($catalogues as $id => $name)
                                                 <option value="{{ $id }}"
                                                     @if ($product->catalogue_id == $id) selected @endif>
@@ -304,7 +305,7 @@
                                 <div class="col-md-12">
                                     <div>
                                         <label for="tags" class="form-label">Tag</label>
-                                        <select name="tags[]" id="tags" class="form-select" multiple>
+                                        <select name="tags[]" id="tags" class="js-example-basic-multiple" multiple>
                                             @foreach ($tags as $id => $name)
                                                 <option value="{{ $id }}"
                                                     @for ($i = 0; $i < count($productTags) ; $i++)
@@ -347,24 +348,41 @@
     <script>
         CKEDITOR.replace('content');
     </script>
-    
-    @if (session()->has('success'))
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
     <script>
-        Swal.fire({
-            icon: "success",
-            title: "Thành công",
-            text: " {{ session('success') }} ",
-            timer: 2500
+        $(document).ready(function() {
+            $("#tags").select2({
+                allowClear: true,
+                dropdownAutoWidth: true
+            });
+            $('.js-example-basic-single').select2({
+                dropdownAutoWidth: true
+            });
         });
     </script>
+
+    @if (Session::has('success'))
+        <script>
+            Swal.fire({
+                icon: "success",
+                title: "Thành công",
+                text: " {{ session('success') }} ",
+                timer: 2500
+            });
+        </script>
+    @elseif(Session::has('error'))
+        <script>
+            Swal.fire({
+                icon: "error",
+                title: "Lỗi",
+                text: " {{ session('error') }} ",
+            });
+        </script>
     @endif
-    @if (session()->has('error'))
-    <script>
-        Swal.fire({
-        icon: "error",
-        title: "Lỗi",
-        text: " {{ session('success') }} ",
-        });
-    </script>
-    @endif
+@endsection
+
+@section('style-libs')
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css">
 @endsection

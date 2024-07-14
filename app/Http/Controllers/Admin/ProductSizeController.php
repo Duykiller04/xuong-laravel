@@ -36,12 +36,9 @@ class ProductSizeController extends Controller
     public function store(StoreProductSizeRequest $request)
     {
         try {
-            DB::beginTransaction();
             ProductSize::create($request->all());
-            DB::commit();
             return redirect()->route('admin.productSizes.index')->with('success','Thêm thành công biến thể size');
         } catch (\Exception $e) {
-            DB::rollBack();
             return back()->with('error','Lỗi thêm biến thể size');
         }
     }
@@ -68,12 +65,9 @@ class ProductSizeController extends Controller
     public function update(UpdateProductSizeRequest $request, ProductSize $productSize)
     {
         try {
-            DB::beginTransaction();
             $productSize->update($request->all());
-            DB::commit();
             return back()->with('success','Cập nhật thành công biến thể size');
         } catch (\Exception $e) {
-            DB::rollBack();
             return back()->with('error','Lỗi cập nhật biến thể size');
         }
     }
@@ -84,12 +78,9 @@ class ProductSizeController extends Controller
     public function destroy(ProductSize $productSize)
     {
         try {
-            DB::beginTransaction();
             $productSize->delete();
-            DB::commit();
             return redirect()->route('admin.productSizes.index')->with('success','Xóa thành công biến thể size');
         } catch (\Exception $e) {
-            DB::rollBack();
             return back()->with('error','Lỗi xóa biến thể size');
         }
     }

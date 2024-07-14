@@ -69,7 +69,7 @@
 
                                     <div class="mt-3">
                                         <label for="catalogue_id" class="form-label">Catalogues</label>
-                                        <select id="" class="form-select" name="catalogue_id"
+                                        <select id="" class="js-example-basic-single" name="catalogue_id"
                                             id="catalogue_id">
                                             @foreach ($catalogues as $id => $name)
                                                 <option value="{{ $id }}">
@@ -258,7 +258,7 @@
                                 <div class="col-md-12">
                                     <div>
                                         <label for="tags" class="form-label">Tag</label>
-                                        <select name="tags[]" id="tags" class="form-select" multiple>
+                                        <select name="tags[]" id="tags" class="js-example-basic-multiple" multiple="multiple">
                                             @foreach ($tags as $id => $name)
                                                 <option value="{{ $id }}">
                                                     {{ $name }}
@@ -299,4 +299,21 @@
     <script>
         CKEDITOR.replace('content');
     </script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            $("#tags").select2({
+                allowClear: true,
+                dropdownAutoWidth: true
+            });
+            $('.js-example-basic-single').select2({
+                dropdownAutoWidth: true
+            });
+        });
+    </script>
+@endsection
+
+@section('style-libs')
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css">
 @endsection

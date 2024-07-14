@@ -113,7 +113,7 @@
 @endsection
 
 @section('scripts')
-    @if (session()->has('success'))
+    @if (Session::has('success'))
     <script>
         Swal.fire({
             icon: "success",
@@ -123,7 +123,7 @@
         });
     </script>
     @endif
-    @if (session()->has('error'))
+    @if (Session::has('error'))
     <script>
         Swal.fire({
         icon: "error",

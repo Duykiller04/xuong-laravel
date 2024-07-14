@@ -11,8 +11,6 @@
     <!-- App favicon -->
     <link rel="shortcut icon" href="{{ asset('theme/assets/images/favicon.ico') }}">
 
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-
     @yield('style-libs')
     <!-- Layout config Js -->
     <script src="{{ asset('theme/assets/js/layout.js') }}"></script>
@@ -98,14 +96,18 @@
     <script src="{{ asset('theme/assets/js/plugins.js') }}"></script>
 
     {{-- plugins --}}
-    <script type='text/javascript' src='https://cdn.jsdelivr.net/npm/toastify-js'></script>
+    {{-- <script type='text/javascript' src='https://cdn.jsdelivr.net/npm/toastify-js'></script> --}}
     <script type='text/javascript' src='theme/assets/libs/choices.js/public/assets/scripts/choices.min.js'></script>
     <script type='text/javascript' src='theme/assets/libs/flatpickr/flatpickr.min.js'></script>
 
     @yield('script-libs')
 
+    
+
     <!-- App js -->
-    <script src="{{ asset('theme/assets/js/app.js') }}"></script>
+    {{-- <script src="{{ asset('theme/assets/js/app.js') }}"></script> --}}
+
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
     @yield('scripts')
 </body>
