@@ -3,6 +3,7 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
 class StoreProductRequest extends FormRequest
 {
@@ -22,23 +23,31 @@ class StoreProductRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'name' => 'required|string',
-            'sku' => 'required|string',
-            'price_regular' => 'required|numeric',
-            'price_sale' => 'numeric',
-            'img_thumbnail' => 'required',
+            'catalogue_id' => ['required', Rule::exists('catalogues', 'id')],
+            'name' => 'required|max:255',
+            'sku' => 'required|max:255|unique:products',
+            'img_thumbnail' => 'image|required',
+            'price_regular' => 'required|min:0',
+            'price_sale' => 'required|min:0',
+            'description' => 'max:255',
+            'content' => 'max:65000',
+            'material' => 'max:255',
+            'user_manual' => 'max:255',
+
+            'product_variants' => 'array' ,
+            'product_variants.*.quantity' => 'required|min:0',
+            'product_variants.*.image' => 'image',
+
+            'tags' => 'array' ,
+            'tags.*' => ['required', 'integer', Rule::exists('tags', 'id')] ,
+
+            'product_galleries' => 'array',
+            'product_galleries.*' => 'image',
         ];
     }
     public function messages() : array{
         return [
-            'name.required' => 'Bạn chưa nhập tên sản phẩm',
-            'name.string' => 'Tên sản phẩm phải là chữ',
-            'sku.required' => 'Bạn chưa nhập SKU',
-            'sku.string' => 'SKU phải là chữ',
-            'price_regular.required' => 'Bạn chưa nhập giá bán',
-            'price_regular.numeric' => 'Giá bán phải là số',
-            'price_sale.numeric' => 'Giá bán sale phải là số',
-            'img_thumbnail.required' => 'Bạn chưa tải ảnh sản phẩm lên',
+
         ];
     }
 }

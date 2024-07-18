@@ -103,9 +103,9 @@
                                     <td>{{ $item->updated_at }}</td>
                                     <td>
                                         <div class="d-flex">
-                                            <a href="{{ route('admin.products.show', $item->sku) }}"
+                                            <a href="{{ route('admin.products.show', $item) }}"
                                                 class="btn btn-info mb-3">Xem</a>
-                                            <a href="{{ route('admin.products.edit', $item->sku) }}"
+                                            <a href="{{ route('admin.products.edit', $item) }}"
                                                 class="btn btn-warning mb-3 ms-3 me-3">Sửa</a>
                                             <form action="{{ route('admin.products.destroy', $item) }}" method="post">
                                                 @csrf
@@ -175,7 +175,7 @@
         Swal.fire({
         icon: "error",
         title: "Lỗi",
-        text: " {{ session('success') }} ",
+        text: " {{ session('error') }} ",
         });
     </script>
     @endif
